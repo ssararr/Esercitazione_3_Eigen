@@ -1,17 +1,17 @@
 #include <iostream>
-#include <iomanip>
-#include "Eigen/Eigen"
+#include <iomanip> //precisione 16
+#include "Eigen/Eigen" //libreria eigen
 
 using namespace std;
 using namespace Eigen;
 
-//fun per risolvere
+//funzione per risolvere
 void solve(Matrix2d A, Vector2d b)
 {
-	Vector2d x_es;
-	x_es<<-1.0, -1.0;
-	Vector2d x_PALU = A.fullPivLu().solve(b);
-	Vector2d x_QR = A.householderQr().solve(b);
+	Vector2d x_es; //inizializzo il vettore soluzione esatta
+	x_es<<-1.0, -1.0; 
+	Vector2d x_PALU = A.fullPivLu().solve(b); //vettore x risultante dalla fattorizzazione PALU
+	Vector2d x_QR = A.householderQr().solve(b); //vettore x risultante dalla fattorizzazione QR
 	double err_PALU = (x_PALU-x_es).norm()/x_es.norm();
 	double err_QR = (x_QR-x_es).norm()/x_es.norm();
 	
@@ -48,7 +48,7 @@ int main()
 	solve(A2, b2);
 	
 	
-	//sistema 2
+	//sistema 3
 	cout << "Sistema 3" << endl;	
 	Matrix2d A3;
 	A3 <<5.547001962252291e-01, -5.547001955851905e-01,
